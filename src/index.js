@@ -1,3 +1,2 @@
 import "./style.css";
-
-console.log("working!");
+import todos from "./todo";
