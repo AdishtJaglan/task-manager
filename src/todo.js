@@ -1,4 +1,4 @@
-const todoList = [];
+import { v1 as uuidv1, validate as uuidValidate } from 'uuid';
 
 class todos {
     constructor(title, description, dueDate, priority) {
@@ -10,28 +10,39 @@ class todos {
 
     static newTodo(title, description, dueDate, priority) {
         const todo = new todos(title, description, dueDate, priority);
-        todoList.push(todo);
 
-        return todoList;
+        return todo;
     }
 
-    static displayTodo(title, description, dueDate, priority) {
+    static displayTodo(todoObj) {
         const todoContainer = document.querySelector("#todos");
         const newTodoContainer = document.createElement("div");
 
         newTodoContainer.innerHTML = `
         <div>
-            <p>${title}</p>
-            <p>${description}</p>
-            <p>${dueDate}</p>
-            <button>test</button>
+            <p>${todoObj.title}</p>
+            <p>${todoObj.description}</p>
+            <p>${todoObj.dueDate}</p>
+            <button>${todoObj.priority}</button>
         </div>
         `
         todoContainer.appendChild(newTodoContainer);
     }
+
+    static populateTodos() {
+        for (let key in localStorage) {
+            if (uuidValidate(key)) {
+                const lsItem = JSON.parse(localStorage.getItem(key));
+
+                this.displayTodo(lsItem);
+            }
+        }
+    }
 }
 
 export default function makeToDo() {
+    todos.populateTodos();
+
     const makeToDoButton = document.querySelector(".daily-todo button");
     const btnCloseTodo = document.querySelector(".btn-close-todo");
     const todoDialog = document.querySelector(".todo-dialog");
@@ -53,7 +64,10 @@ export default function makeToDo() {
         const todoDescription = document.querySelector("#todo-description");
         const todoPriority = document.querySelector("#todo-priority");
 
-        todos.newTodo(todoTitle.value, todoDescription.value, todoDueDate.value, todoPriority.value);
-        todos.displayTodo(todoTitle.value, todoDescription.value, todoDueDate.value, todoPriority.value);
+        let item = todos.newTodo(todoTitle.value, todoDescription.value, todoDueDate.value, todoPriority.value);
+        todos.displayTodo(item);
+
+        let itemJSON = JSON.stringify(item);
+        localStorage.setItem(`${uuidv1()}`, itemJSON);;
     });
 }
