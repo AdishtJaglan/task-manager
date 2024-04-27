@@ -1,2 +1,4 @@
 import "./style.css";
-import todos from "./todo";
+import makeToDo from "./todo";
+
+makeToDo();
