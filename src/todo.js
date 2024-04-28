@@ -1,6 +1,6 @@
 import { v1 as uuidv1, validate as uuidValidate } from 'uuid';
 
-class todos {
+export class todos {
     constructor(title, description, dueDate, priority) {
         this.title = title;
         this.description = description;

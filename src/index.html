@@ -17,39 +17,55 @@
         <div class="daily-todo">
             <p>todos</p>
             <button>add todo</button>
-
-            <dialog class="todo-dialog">
-                <div class="todo-container">
-                    <form method="dialog" class="todo-form">
-                        <input type="text" name="title" id="todo-title">
-
-                        <input type="date" name="dueDate" id="todo-dueDate">
-
-                        <textarea name="description" id="todo-description" cols="30" rows="10"></textarea>
-
-                        <select name="priority" id="todo-priority">
-                            <option value="low" selected>low</option>
-                            <option value="medium">medium</option>
-                            <option value="high">high</option>
-                        </select>
-
-                        <button class="btn-make-todo" type="submit">make todo</button>
-                    </form>
-
-                    <button autofocus class="btn-close-todo">close</button>
-                </div>
-            </dialog>
         </div>
 
         <div class="projects">
             <p>Projects</p>
             <button>add project</button>
         </div>
+
+        <div class="project-names">
+
+        </div>
     </div>
 
     <div id="todos">
 
     </div>
+
+    <dialog class="todo-dialog">
+        <div class="todo-container">
+            <form method="dialog" class="todo-form">
+                <input type="text" name="title" id="todo-title">
+
+                <input type="date" name="dueDate" id="todo-dueDate">
+
+                <textarea name="description" id="todo-description" cols="30" rows="10"></textarea>
+
+                <select name="priority" id="todo-priority">
+                    <option value="low" selected>low</option>
+                    <option value="medium">medium</option>
+                    <option value="high">high</option>
+                </select>
+
+                <button class="btn-make-todo" type="submit">make todo</button>
+            </form>
+
+            <button autofocus class="btn-close-todo">close</button>
+        </div>
+    </dialog>
+
+    <dialog class="project-dialog">
+        <div class="project-container">
+            <form action="" method="dialog" class="project-form">
+                <input type="name" id="name">
+
+                <button type="submit" class="btn-make-project">make project</button>
+            </form>
+
+            <button autofocus class="btn-close-project">close</button>
+        </div>
+    </dialog>
 </body>
 
 </html>
