@@ -1,12 +1,12 @@
 import { v1 as uuidv1, validate as uuidValidate } from 'uuid';
 
-class project {
+class Project {
     constructor(name) {
         this.name = name;
     }
 
     static newProject(name) {
-        const proj = new project(name);
+        const proj = new Project(name);
 
         return proj;
     }
@@ -57,7 +57,7 @@ class project {
 }
 
 export default function makeProject() {
-    project.populateProject();
+    Project.populateProject();
 
     const makeProjectButton = document.querySelector(".projects button");
     const projectDialog = document.querySelector(".project-dialog");
@@ -78,8 +78,8 @@ export default function makeProject() {
         const projectName = document.querySelector("#name");
 
         let id = `project-${uuidv1()}`;
-        let projectItem = new project(projectName.value);
-        project.displayProject(projectItem, id);
+        let projectItem = new Project(projectName.value);
+        Project.displayProject(projectItem, id);
 
         let projectItemJSON = JSON.stringify(projectItem);
         localStorage.setItem(id, projectItemJSON);
@@ -89,7 +89,7 @@ export default function makeProject() {
         if (e.target.classList.contains("btn-delete-project")) {
             const projectId = e.target.dataset.id;
 
-            project.deleteProject(projectId);
+            Project.deleteProject(projectId);
         }
     });
 }

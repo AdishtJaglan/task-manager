@@ -1,6 +1,6 @@
 import { v1 as uuidv1, validate as uuidValidate } from 'uuid';
 
-export class todos {
+export class Todos {
     constructor(title, description, dueDate, priority) {
         this.title = title;
         this.description = description;
@@ -9,7 +9,7 @@ export class todos {
     }
 
     static newTodo(title, description, dueDate, priority) {
-        const todo = new todos(title, description, dueDate, priority);
+        const todo = new Todos(title, description, dueDate, priority);
 
         return todo;
     }
@@ -60,7 +60,7 @@ export class todos {
 }
 
 export default function makeToDo() {
-    todos.populateTodos();
+    Todos.populateTodos();
 
     const makeToDoButton = document.querySelector(".daily-todo button");
     const btnCloseTodo = document.querySelector(".btn-close-todo");
@@ -84,8 +84,8 @@ export default function makeToDo() {
         const todoPriority = document.querySelector("#todo-priority");
 
         let id = uuidv1();
-        let item = todos.newTodo(todoTitle.value, todoDescription.value, todoDueDate.value, todoPriority.value);
-        todos.displayTodo(item, id);
+        let item = Todos.newTodo(todoTitle.value, todoDescription.value, todoDueDate.value, todoPriority.value);
+        Todos.displayTodo(item, id);
 
         let itemJSON = JSON.stringify(item);
         localStorage.setItem(`${id}`, itemJSON);
@@ -95,7 +95,7 @@ export default function makeToDo() {
         if (e.target.classList.contains("btn-delete-todo")) {
             const todoId = e.target.dataset.id;
 
-            todos.deleteTodo(todoId);
+            Todos.deleteTodo(todoId);
         }
     });
 }
