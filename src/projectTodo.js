@@ -15,7 +15,7 @@ class ProjectTodo {
         `;
     }
 
-    displayTodo() {
+    displayTodos() {
         const keys = Object.keys(localStorage);
         const filteredKey = keys.filter(key => key.includes(`${this.name}`));
 
@@ -55,7 +55,7 @@ class ProjectTodo {
             const projectTodoPriority = document.querySelector("#project-todo-priority");
 
             let id = `${this.name}-${uuidv1()}`;
-            let projectTodoItem = Todos.newTodo(projectTodoTitle.value, projectTodoDescription.value, projectTodoDueDate.value, projectTodoPriority.value)
+            let projectTodoItem = Todos.newTodo(projectTodoTitle.value, projectTodoDescription.value, projectTodoDueDate.value, projectTodoPriority.value);
             let projectTodoJSON = JSON.stringify(projectTodoItem);
 
             Todos.displayTodo(projectTodoItem, id);
@@ -65,18 +65,20 @@ class ProjectTodo {
 }
 
 export default function projectTodo() {
-    const btn = document.querySelectorAll(".project-title");
+    const projectTitleContainer = document.querySelector(".project-names");
 
-    btn.forEach(button => {
-        button.addEventListener("click", (e) => {
+    projectTitleContainer.addEventListener("click", (e) => {
+        if (e.target.classList.contains("project-title")) {
+            e.stopPropagation();
+
             let projectName = e.target.dataset.name;
 
             clearMainContent();
 
             const projectTodoInstance = new ProjectTodo(projectName);
             projectTodoInstance.display();
-            projectTodoInstance.displayTodo();
+            projectTodoInstance.displayTodos();
             projectTodoInstance.handleForms();
-        });
+        }
     });
 }

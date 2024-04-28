@@ -85,10 +85,16 @@ export default function makeToDo() {
 
         let id = uuidv1();
         let item = Todos.newTodo(todoTitle.value, todoDescription.value, todoDueDate.value, todoPriority.value);
-        Todos.displayTodo(item, id);
-
         let itemJSON = JSON.stringify(item);
+
+        Todos.displayTodo(item, id);
         localStorage.setItem(`${id}`, itemJSON);
+
+        todoTitle.value = "";
+        todoDescription.value = "";
+        todoDueDate.value = "";
+        todoPriority.value = "";
+        todoDialog.close();
     });
 
     document.addEventListener("click", (e) => {

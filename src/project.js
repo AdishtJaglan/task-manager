@@ -79,10 +79,13 @@ export default function makeProject() {
 
         let id = `project-${uuidv1()}`;
         let projectItem = new Project(projectName.value);
-        Project.displayProject(projectItem, id);
-
         let projectItemJSON = JSON.stringify(projectItem);
+
+        Project.displayProject(projectItem, id);
         localStorage.setItem(id, projectItemJSON);
+
+        projectName.value = "";
+        projectDialog.close();
     });
 
     document.addEventListener("click", (e) => {
