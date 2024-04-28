@@ -1,14 +1,13 @@
 import { todos } from "./todo";
 import { v1 as uuidv1, validate as uuidValidate } from 'uuid';
 
-class project extends todos {
-    constructor(name, title = " ", description = " ", dueDate = " ", priority = " ") {
-        super(title, description, dueDate, priority);
+class project {
+    constructor(name) {
         this.name = name;
     }
 
-    static newProject(name, title = " ", description = " ", dueDate = " ", priority = " ") {
-        const proj = new project(name, title, description, dueDate, priority);
+    static newProject(name) {
+        const proj = new project(name);
 
         return proj;
     }
@@ -18,7 +17,10 @@ class project extends todos {
         const projectContainer = document.createElement("div");
 
         projectContainer.innerHTML = `
-            <button onclick="showTodo('${id}')">${projObj.name}</button>
+            <div>
+                <button onclick="showTodo('${id}')">${projObj.name}</button>
+                <button class="btn-delete-project" data-id="${id}">delete</button>
+            </div>
         `
 
         projectNameContainer.appendChild(projectContainer);
@@ -33,6 +35,25 @@ class project extends todos {
 
             this.displayProject(lsProjectItem, key);
         }
+    }
+
+    static deleteProject(id) {
+        localStorage.removeItem(id);
+
+        const projectToDelete = document.querySelector(`[data-id="${id}]"`);
+        if (projectToDelete) {
+            projectToDelete.closest("div").remove();
+        }
+
+        this.reloadProject();
+    }
+
+    static reloadProject() {
+        const projectNameContainer = document.querySelector(".project-names");
+
+        projectNameContainer.innerHTML = " ";
+
+        this.populateProject();
     }
 }
 
@@ -57,11 +78,19 @@ export default function makeProject() {
 
         const projectName = document.querySelector("#name");
 
-        let id = uuidv1();
+        let id = `project-${uuidv1()}`;
         let projectItem = new project(projectName.value);
-        project.displayProject(projectItem);
+        project.displayProject(projectItem, id);
 
         let projectItemJSON = JSON.stringify(projectItem);
-        localStorage.setItem(`project-${id}`, projectItemJSON);
+        localStorage.setItem(id, projectItemJSON);
+    });
+
+    document.addEventListener("click", (e) => {
+        if (e.target.classList.contains("btn-delete-project")) {
+            const projectId = e.target.dataset.id;
+
+            project.deleteProject(projectId);
+        }
     });
 }

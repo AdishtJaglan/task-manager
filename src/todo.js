@@ -24,7 +24,7 @@ export class todos {
             <p>${todoObj.description}</p>
             <p>${todoObj.dueDate}</p>
             <button>${todoObj.priority}</button>
-            <button data-id="${id}" class="btn-delete">delete</button>
+            <button data-id="${id}" class="btn-delete-todo">delete</button>
         </div>
         `
         todoContainer.appendChild(newTodoContainer);
@@ -92,11 +92,10 @@ export default function makeToDo() {
     });
 
     document.addEventListener("click", (e) => {
-        if (e.target.classList.contains("btn-delete")) {
+        if (e.target.classList.contains("btn-delete-todo")) {
             const todoId = e.target.dataset.id;
 
             todos.deleteTodo(todoId);
-            todos.populateTodos();
         }
     });
 }
