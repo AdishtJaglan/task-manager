@@ -1,4 +1,3 @@
-import { todos } from "./todo";
 import { v1 as uuidv1, validate as uuidValidate } from 'uuid';
 
 class project {
@@ -12,13 +11,13 @@ class project {
         return proj;
     }
 
-    static displayProject(projObj, id) {
+    static displayProject({ name }, id) {
         const projectNameContainer = document.querySelector(".project-names");
         const projectContainer = document.createElement("div");
 
         projectContainer.innerHTML = `
             <div>
-                <button onclick="showTodo('${id}')">${projObj.name}</button>
+                <button data-name=${name} class="project-title">${name}</button>
                 <button class="btn-delete-project" data-id="${id}">delete</button>
             </div>
         `

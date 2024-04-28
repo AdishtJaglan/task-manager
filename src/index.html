@@ -66,6 +66,29 @@
             <button autofocus class="btn-close-project">close</button>
         </div>
     </dialog>
+
+    <dialog class="project-todo-dialog">
+        <div class="project-todo-container">
+            <p>lol u here</p>
+            <form action="" class="project-todo-form" method="dialog">
+                <input type="text" name="title" id="project-todo-title">
+
+                <input type="date" name="dueDate" id="project-todo-dueDate">
+
+                <textarea name="description" id="project-todo-description" cols="30" rows="10"></textarea>
+
+                <select name="priority" id="project-todo-priority">
+                    <option value="low" selected>low</option>
+                    <option value="medium">medium</option>
+                    <option value="high">high</option>
+                </select>
+
+                <button class="btn-make-todo" type="submit">make todo</button>
+            </form>
+
+            <button autofocus class="btn-close-project-todo">close</button>
+        </div>
+    </dialog>
 </body>
 
 </html>
