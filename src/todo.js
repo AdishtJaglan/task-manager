@@ -14,7 +14,7 @@ class todos {
         return todo;
     }
 
-    static displayTodo(todoObj) {
+    static displayTodo(todoObj, id) {
         const todoContainer = document.querySelector("#todos");
         const newTodoContainer = document.createElement("div");
 
@@ -24,6 +24,7 @@ class todos {
             <p>${todoObj.description}</p>
             <p>${todoObj.dueDate}</p>
             <button>${todoObj.priority}</button>
+            <button data-id="${id}" class="btn-delete">delete</button>
         </div>
         `
         todoContainer.appendChild(newTodoContainer);
@@ -34,9 +35,27 @@ class todos {
             if (uuidValidate(key)) {
                 const lsItem = JSON.parse(localStorage.getItem(key));
 
-                this.displayTodo(lsItem);
+                this.displayTodo(lsItem, key);
             }
         }
+    }
+
+    static deleteTodo(id) {
+        localStorage.removeItem(id);
+        const todoToDelete = document.querySelector(`[data-id="${id}]"`);
+
+        if (todoToDelete) {
+            todoToDelete.closest("div").remove();
+        }
+
+        this.reloadTodos();
+    }
+
+    static reloadTodos() {
+        const todoContainer = document.querySelector("#todos");
+        todoContainer.innerHTML = " ";
+
+        this.populateTodos();
     }
 }
 
@@ -64,10 +83,20 @@ export default function makeToDo() {
         const todoDescription = document.querySelector("#todo-description");
         const todoPriority = document.querySelector("#todo-priority");
 
+        let id = uuidv1();
         let item = todos.newTodo(todoTitle.value, todoDescription.value, todoDueDate.value, todoPriority.value);
-        todos.displayTodo(item);
+        todos.displayTodo(item, id);
 
         let itemJSON = JSON.stringify(item);
-        localStorage.setItem(`${uuidv1()}`, itemJSON);;
+        localStorage.setItem(`${id}`, itemJSON);
+    });
+
+    document.addEventListener("click", (e) => {
+        if (e.target.classList.contains("btn-delete")) {
+            const todoId = e.target.dataset.id;
+
+            todos.deleteTodo(todoId);
+            todos.populateTodos();
+        }
     });
 }
