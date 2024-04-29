@@ -19,11 +19,11 @@ export class Todos {
         const newTodoContainer = document.createElement("div");
 
         newTodoContainer.innerHTML = `
-        <div>
-            <p>${todoObj.title}</p>
-            <p>${todoObj.description}</p>
-            <p>${todoObj.dueDate}</p>
-            <button>${todoObj.priority}</button>
+        <div class="todo-card">
+            <p class="todo-title">${todoObj.title}</p>
+            <p class="todo-desc">${todoObj.description}</p>
+            <p class="todo-dueDate">${todoObj.dueDate}</p>
+            <button class="todo-priority">${todoObj.priority}</button>
             <button data-id="${id}" class="btn-delete-todo">delete</button>
         </div>
         `
