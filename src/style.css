@@ -3,8 +3,8 @@ body {
     height: 100vh;
 
     margin: 0;
-    background-color: black;
-    color: white;
+    background-color: #212529;
+    color: black;
 
     display: grid;
     grid-template-rows: 1fr 7fr;
@@ -21,7 +21,7 @@ nav {
     grid-column: 2/3;
 
     width: 100%;
-    background-color: red;
+    background-color: #dee2e6;
 }
 
 #sidebar {
@@ -29,7 +29,7 @@ nav {
     grid-column: 1/2;
 
     width: 100%;
-    background-color: green;
+    background-color: #e9ecef;
 }
 
 button {
@@ -41,6 +41,8 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    color: white;
 }
 
 nav p:nth-child(1) {
@@ -167,3 +169,5 @@ select {
 
     border-radius: 8px;
 }
+
+/* styling todos */
