@@ -18,13 +18,20 @@ export class Todos {
         const todoContainer = document.querySelector("#todos");
         const newTodoContainer = document.createElement("div");
 
+        const style = getPriorityColor(todoObj.priority);
+
         newTodoContainer.innerHTML = `
         <div class="todo-card">
-            <p class="todo-title">${todoObj.title}</p>
-            <p class="todo-desc">${todoObj.description}</p>
-            <p class="todo-dueDate">${todoObj.dueDate}</p>
-            <button class="todo-priority">${todoObj.priority}</button>
-            <button data-id="${id}" class="btn-delete-todo">delete</button>
+            <div class="todo-headings">   
+                <p class="todo-title">${todoObj.title}</p>
+                <p class="todo-desc">${todoObj.description}</p>
+            </div>
+            
+            <div class="todo-actions">
+                <p class="todo-dueDate">${todoObj.dueDate}</p>
+                <button class="todo-priority" style="background-color:${style}">${todoObj.priority}</button>
+                <button data-id="${id}" class="btn-delete-todo">delete</button>
+            </div>
         </div>
         `
         todoContainer.appendChild(newTodoContainer);
@@ -56,6 +63,17 @@ export class Todos {
         todoContainer.innerHTML = " ";
 
         this.populateTodos();
+    }
+}
+
+function getPriorityColor(priority) {
+    switch (priority) {
+        case "high":
+            return "#d00000";
+        case "medium":
+            return "#FFA500";
+        default:
+            return "#aacc00";
     }
 }
 
