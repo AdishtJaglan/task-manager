@@ -1,4 +1,6 @@
 import { v1 as uuidv1, validate as uuidValidate } from 'uuid';
+import deleteIcon from './images/delete-icon-2.svg';
+import expandIcon from './images/expand.svg';
 
 export class Todos {
     constructor(title, description, dueDate, priority) {
@@ -22,15 +24,17 @@ export class Todos {
 
         newTodoContainer.innerHTML = `
         <div class="todo-card">
-            <div class="todo-headings">   
+            <div class="todo-headings">  
+                <div class="heading">
                 <p class="todo-title">${todoObj.title}</p>
-                <p class="todo-desc">${todoObj.description}</p>
+                <button class="todo-priority" style="background-color:${style}"></button>
+                </div>
+                <p class="todo-dueDate">${todoObj.dueDate}</p>
             </div>
             
             <div class="todo-actions">
-                <p class="todo-dueDate">${todoObj.dueDate}</p>
-                <button class="todo-priority" style="background-color:${style}">${todoObj.priority}</button>
-                <button data-id="${id}" class="btn-delete-todo">delete</button>
+                <img src="${deleteIcon}" alt="delete button" data-id="${id}" class="btn-delete-todo">
+                <img src="${expandIcon}" class="btn-expand-todo">
             </div>
         </div>
         `

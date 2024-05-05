@@ -185,35 +185,63 @@ select {
   justify-content: space-between;
 
   border-radius: 8px;
-  background-color: #ced4da;
+  background-color: white;
 }
 
 .todo-card p {
   margin: 0;
 }
 
-.todo-headings p:nth-child(1) {
-  font-size: 1.5em;
-  font-weight: 600;
-  color: #111111;
-  padding: 4px;
-}
-
-.todo-card p:nth-child(2) {
-  color: #343434;
-  font-size: 0.9em;
-}
-
 .todo-actions {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+
+  width: 3%;
 }
 
-.todo-priority,
-.btn-delete-todo {
+.todo-priority {
   padding: 6px;
   border-radius: 5px;
   width: 100%;
+}
+
+.btn-delete-todo {
+  width: 100%;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.btn-expand-todo {
+  width: 100%;
+  padding: 6px;
+  cursor: pointer;
+}
+
+.todo-priority {
+  border-radius: 50%;
+  width: auto;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: 12px;
+}
+
+.todo-title {
+  font-size: 1.5em;
+  font-weight: 600;
+
+  color: #081c15;
+  padding: 8px;
+}
+
+.todo-dueDate {
+  padding: 8px;
+
+  font-size: 0.9em;
+  color: #495057;
 }
