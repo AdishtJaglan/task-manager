@@ -9,7 +9,6 @@ body {
 
   margin: 0;
   background-color: #212529;
-  color: black;
 
   display: grid;
   grid-template-rows: 1fr 7fr;
@@ -50,7 +49,7 @@ nav {
   align-items: center;
   justify-content: space-between;
 
-  color: white;
+  color: #adb5bd;
 }
 
 nav p:nth-child(1) {
@@ -86,6 +85,7 @@ nav p:nth-child(2) {
 .daily-todo p,
 .projects p {
   font-size: 1.8em;
+  color: #495057;
 
   margin: 5%;
 }

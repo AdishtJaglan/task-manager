@@ -34,11 +34,39 @@ export class Todos {
             
             <div class="todo-actions">
                 <img src="${deleteIcon}" alt="delete button" data-id="${id}" class="btn-delete-todo">
-                <img src="${expandIcon}" class="btn-expand-todo">
+                <img src="${expandIcon}" data-infoId="${id}" class="btn-expand-todo">
             </div>
         </div>
         `
         todoContainer.appendChild(newTodoContainer);
+    }
+
+    static displayTodoInfo(id) {
+        const lsItem = JSON.parse(localStorage.getItem(id));
+        const infoDialog = document.createElement("dialog");
+        const body = document.querySelector("body");
+        
+        infoDialog.classList.add("info-dialog");
+        infoDialog.innerHTML = `
+        <div class="info-container">
+        <div class="info-heading">
+        <p>${lsItem.title}</p>
+        <p>${lsItem.priority}</p>
+        </div>
+        
+        <p>${lsItem.description}</p>
+        <p>${lsItem.dueDate}</p>
+        <button class="btn-info-close">close</button>
+        </div>
+        `;
+        
+        body.appendChild(infoDialog);
+        infoDialog.showModal();
+        
+        const closeInfoBtn = document.querySelector(".btn-info-close");
+        closeInfoBtn.addEventListener("click", () => {
+            infoDialog.close();
+        });
     }
 
     static populateTodos() {
@@ -97,6 +125,7 @@ export default function makeToDo() {
         todoDialog.close();
     });
 
+    // submitting form and storing data local storage
     todoForm.addEventListener("submit", (e) => {
         e.preventDefault();
 
@@ -119,11 +148,16 @@ export default function makeToDo() {
         todoDialog.close();
     });
 
+    // listening for delete button & expand view click
     document.addEventListener("click", (e) => {
         if (e.target.classList.contains("btn-delete-todo")) {
             const todoId = e.target.dataset.id;
 
             Todos.deleteTodo(todoId);
+        } else if (e.target.classList.contains("btn-expand-todo")) {
+            const todoId = e.target.dataset.infoid;
+
+            Todos.displayTodoInfo(todoId);
         }
     });
 }
