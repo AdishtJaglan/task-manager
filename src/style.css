@@ -1,3 +1,8 @@
+:root {
+  --text-primary: "Jaro", sans-serif;
+  --text-secondary: "Lilita One", sans-serif;
+}
+
 body {
   width: 100%;
   height: 100vh;
@@ -10,7 +15,7 @@ body {
   grid-template-rows: 1fr 7fr;
   grid-template-columns: 1fr 4fr;
 
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: var(--text-primary);
 }
 
 nav {
@@ -198,6 +203,7 @@ select {
   justify-content: center;
 
   width: 3%;
+  margin-right: 2%;
 }
 
 .todo-priority {
@@ -234,14 +240,17 @@ select {
 .todo-title {
   font-size: 1.5em;
   font-weight: 600;
+  font-family: var(--text-secondary);
 
-  color: #081c15;
+  color: #495057;
   padding: 8px;
 }
 
 .todo-dueDate {
-  padding: 8px;
-
   font-size: 0.9em;
-  color: #495057;
+  font-family: var(--text-secondary);
+  font-weight: 100;
+
+  padding: 8px;
+  color: #adb5bd;
 }

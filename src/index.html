@@ -1,93 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo list</title>
-</head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&family=Lilita+One&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
+  <body>
     <nav>
-        <p>ToDo</p>
-        <p>by adisht</p>
+      <p>ToDo</p>
+      <p>by adisht</p>
     </nav>
 
     <div id="sidebar">
-        <div class="daily-todo">
-            <p>todos</p>
-            <button>add todo</button>
-        </div>
+      <div class="daily-todo">
+        <p>todos</p>
+        <button>add todo</button>
+      </div>
 
-        <div class="projects">
-            <p>projects</p>
-            <button>add project</button>
-        </div>
+      <div class="projects">
+        <p>projects</p>
+        <button>add project</button>
+      </div>
 
-        <div class="project-names">
-
-        </div>
+      <div class="project-names"></div>
     </div>
 
-    <div id="todos">
-
-    </div>
+    <div id="todos"></div>
 
     <dialog class="todo-dialog">
-        <div class="todo-container">
-            <form method="dialog" class="todo-form">
-                <input type="text" name="title" id="todo-title">
+      <div class="todo-container">
+        <form method="dialog" class="todo-form">
+          <input type="text" name="title" id="todo-title" />
 
-                <input type="date" name="dueDate" id="todo-dueDate">
+          <input type="date" name="dueDate" id="todo-dueDate" />
 
-                <textarea name="description" id="todo-description" cols="30" rows="6"></textarea>
+          <textarea
+            name="description"
+            id="todo-description"
+            cols="30"
+            rows="6"
+          ></textarea>
 
-                <select name="priority" id="todo-priority">
-                    <option value="low" selected>low</option>
-                    <option value="medium">medium</option>
-                    <option value="high">high</option>
-                </select>
+          <select name="priority" id="todo-priority">
+            <option value="low" selected>low</option>
+            <option value="medium">medium</option>
+            <option value="high">high</option>
+          </select>
 
-                <button class="btn-make-todo" type="submit">make todo</button>
-            </form>
+          <button class="btn-make-todo" type="submit">make todo</button>
+        </form>
 
-            <button autofocus class="btn-close-todo">close</button>
-        </div>
+        <button autofocus class="btn-close-todo">close</button>
+      </div>
     </dialog>
 
     <dialog class="project-dialog">
-        <div class="project-container">
-            <form action="" method="dialog" class="project-form">
-                <input type="name" id="name">
+      <div class="project-container">
+        <form action="" method="dialog" class="project-form">
+          <input type="name" id="name" />
 
-                <button type="submit" class="btn-make-project">make project</button>
-            </form>
+          <button type="submit" class="btn-make-project">make project</button>
+        </form>
 
-            <button autofocus class="btn-close-project">close</button>
-        </div>
+        <button autofocus class="btn-close-project">close</button>
+      </div>
     </dialog>
 
     <dialog class="project-todo-dialog">
-        <div class="project-todo-container">
-            <form action="" class="project-todo-form" method="dialog">
-                <input type="text" name="title" id="project-todo-title">
+      <div class="project-todo-container">
+        <form action="" class="project-todo-form" method="dialog">
+          <input type="text" name="title" id="project-todo-title" />
 
-                <input type="date" name="dueDate" id="project-todo-dueDate">
+          <input type="date" name="dueDate" id="project-todo-dueDate" />
 
-                <textarea name="description" id="project-todo-description" cols="30" rows="10"></textarea>
+          <textarea
+            name="description"
+            id="project-todo-description"
+            cols="30"
+            rows="10"
+          ></textarea>
 
-                <select name="priority" id="project-todo-priority">
-                    <option value="low" selected>low</option>
-                    <option value="medium">medium</option>
-                    <option value="high">high</option>
-                </select>
+          <select name="priority" id="project-todo-priority">
+            <option value="low" selected>low</option>
+            <option value="medium">medium</option>
+            <option value="high">high</option>
+          </select>
 
-                <button class="btn-make-project-todo" type="submit">make todo</button>
-            </form>
+          <button class="btn-make-project-todo" type="submit">make todo</button>
+        </form>
 
-            <button autofocus class="btn-close-project-todo">close</button>
-        </div>
+        <button autofocus class="btn-close-project-todo">close</button>
+      </div>
     </dialog>
-</body>
-
+  </body>
 </html>
