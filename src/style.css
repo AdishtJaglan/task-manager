@@ -1,6 +1,7 @@
 :root {
   --text-primary: "Jaro", sans-serif;
   --text-secondary: "Lilita One", sans-serif;
+  --text-tertiary: "Roboto Condensed", sans-serif;
 }
 
 body {
@@ -11,7 +12,7 @@ body {
   background-color: #212529;
 
   display: grid;
-  grid-template-rows: 1fr 7fr;
+  grid-template-rows: 1fr 9fr;
   grid-template-columns: 1fr 4fr;
 
   font-family: var(--text-primary);
@@ -50,11 +51,12 @@ nav {
   justify-content: space-between;
 
   color: #adb5bd;
+  height: 10vh;
 }
 
 nav p:nth-child(1) {
   margin-left: 2%;
-  font-size: 1.7em;
+  font-size: 2.5em;
 }
 
 nav p:nth-child(2) {
@@ -106,6 +108,10 @@ dialog {
   height: 40%;
 
   background-color: lightgrey;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .todo-container,
@@ -190,7 +196,7 @@ select {
   justify-content: space-between;
 
   border-radius: 8px;
-  background-color: white;
+  background-color: #f8f9fa;
 }
 
 .todo-card p {
@@ -253,4 +259,77 @@ select {
 
   padding: 8px;
   color: #adb5bd;
+}
+
+/* styling info modal */
+.info-dialog {
+  width: 30%;
+  height: 30%;
+
+  /* background-color: #8d99ae; */
+  background-color: #edf2f4;
+  border: none;
+}
+
+.info-dialog p {
+  margin: 0;
+
+  font-family: var(--text-tertiary);
+}
+
+.info-container {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: self-start;
+}
+
+.info-heading {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  gap: 3%;
+}
+
+.info-heading p {
+  font-size: 2.4em;
+  font-weight: 800;
+  padding: 4px;
+  color: #343a40;
+}
+
+.info-heading button {
+  outline: none;
+  padding: 4px;
+}
+
+.info-container p:nth-child(2) {
+  font-size: 1.4em;
+  font-weight: 400;
+  color: #495057;
+  padding: 4px;
+}
+
+.info-container p:nth-child(3) {
+  font-size: 1.2em;
+  font-weight: 300;
+  color: #6c757d;
+  padding: 4px;
+}
+
+.btn-info-close {
+  padding: 4px;
+  margin-left: 4px;
+  margin-top: 4px;
+
+  width: 20%;
+  height: 15%;
+  border-radius: 8px;
+  font-family: var(--text-tertiary);
+  font-size: 0.8em;
+  font-weight: 400;
+  color: #343a40;
 }

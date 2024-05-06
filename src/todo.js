@@ -19,7 +19,6 @@ export class Todos {
     static displayTodo(todoObj, id) {
         const todoContainer = document.querySelector("#todos");
         const newTodoContainer = document.createElement("div");
-
         const style = getPriorityColor(todoObj.priority);
 
         newTodoContainer.innerHTML = `
@@ -45,27 +44,29 @@ export class Todos {
         const lsItem = JSON.parse(localStorage.getItem(id));
         const infoDialog = document.createElement("dialog");
         const body = document.querySelector("body");
-        
+        const style = getPriorityColor(lsItem.priority);
+
         infoDialog.classList.add("info-dialog");
         infoDialog.innerHTML = `
         <div class="info-container">
-        <div class="info-heading">
-        <p>${lsItem.title}</p>
-        <p>${lsItem.priority}</p>
-        </div>
+            <div class="info-heading">
+                <p>${lsItem.title}</p>
+                <button class="todo-priority" style="background-color:${style}"></button>
+            </div>
         
-        <p>${lsItem.description}</p>
-        <p>${lsItem.dueDate}</p>
-        <button class="btn-info-close">close</button>
+            <p>${lsItem.dueDate}</p>
+            <p>${lsItem.description}</p>
+            <button class="btn-info-close">close</button>
         </div>
         `;
-        
+
         body.appendChild(infoDialog);
         infoDialog.showModal();
-        
-        const closeInfoBtn = document.querySelector(".btn-info-close");
+
+        const closeInfoBtn = infoDialog.querySelector(".btn-info-close");
         closeInfoBtn.addEventListener("click", () => {
             infoDialog.close();
+            infoDialog.remove();
         });
     }
 
