@@ -266,7 +266,6 @@ select {
   width: 30%;
   height: 30%;
 
-  /* background-color: #8d99ae; */
   background-color: #edf2f4;
   border: none;
 }
@@ -332,4 +331,42 @@ select {
   font-size: 0.8em;
   font-weight: 400;
   color: #343a40;
+}
+
+/* project names styling */
+.project-names {
+  width: 100%;
+  margin-left: 8%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: self-start;
+  justify-content: center;
+}
+
+.project-names-container {
+  width: 16.5vw;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4%;
+  padding: 4%;
+  margin: 3%;
+
+  background-color: #f8f9fa;
+  border-radius: 8px;
+}
+
+.project-title {
+  background-color: #f8f9fa;
+  cursor: pointer;
+
+  font-family: var(--text-secondary);
+  font-size: 1.3em;
+  color:#495057
+}
+
+.btn-delete-project {
+  cursor: pointer;
 }

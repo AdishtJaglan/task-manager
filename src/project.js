@@ -1,4 +1,5 @@
 import { v1 as uuidv1, validate as uuidValidate } from 'uuid';
+import deleteIcon from './images/delete-icon-2.svg';
 
 class Project {
     constructor(name) {
@@ -16,9 +17,9 @@ class Project {
         const projectContainer = document.createElement("div");
 
         projectContainer.innerHTML = `
-            <div>
+            <div class="project-names-container">
                 <button data-name=${name} class="project-title">${name}</button>
-                <button class="btn-delete-project" data-id="${id}">delete</button>
+                <img src="${deleteIcon}" alt="delete button" data-id="${id}" class="btn-delete-project">
             </div>
         `
 
