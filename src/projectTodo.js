@@ -1,23 +1,24 @@
 import { v1 as uuidv1 } from 'uuid';
 import { Todos } from "./todo";
 import clearMainContent from "./clear";
+let projectName;
 
 class ProjectTodo {
     constructor(name) {
         this.name = name;
     }
 
-    display() {
+    static display(projectName) {
         const formContainer = document.querySelector(".daily-todo");
         formContainer.innerHTML = `
-            <p>${this.name} todos</p>
+            <p>${projectName} todos</p>
             <button class="btn-project-todo">add todo</button>
         `;
     }
 
-    displayTodos() {
+    static displayTodos(projectName) {
         const keys = Object.keys(localStorage);
-        const filteredKey = keys.filter(key => key.includes(`${this.name}`));
+        const filteredKey = keys.filter(key => key.includes(`${projectName}`));
 
         for (let key of filteredKey) {
             let ptItem = JSON.parse(localStorage.getItem(key));
@@ -26,13 +27,7 @@ class ProjectTodo {
         }
     }
 
-    handleForms() {
-        const projectTodoContainer = document.querySelector("#todos");
-        const projectTitle = document.createElement("p");
-
-        projectTitle.textContent = this.name;
-        projectTodoContainer.appendChild(projectTitle);
-
+    static handleForms() {
         const makeProjectToDoBtn = document.querySelector(".btn-project-todo");
         const btnCloseProjectTodo = document.querySelector(".btn-close-project-todo");
         const projectTodoDialog = document.querySelector(".project-todo-dialog");
@@ -48,13 +43,14 @@ class ProjectTodo {
 
         projectTodoForm.addEventListener("submit", (e) => {
             e.preventDefault();
+            e.stopImmediatePropagation();
 
             const projectTodoTitle = document.querySelector("#project-todo-title");
             const projectTodoDueDate = document.querySelector("#project-todo-dueDate");
             const projectTodoDescription = document.querySelector("#project-todo-description");
             const projectTodoPriority = document.querySelector("#project-todo-priority");
 
-            let id = `${this.name}-${uuidv1()}`;
+            let id = `${projectName}-${uuidv1()}`;
             let projectTodoItem = Todos.newTodo(projectTodoTitle.value, projectTodoDescription.value, projectTodoDueDate.value, projectTodoPriority.value);
             let projectTodoJSON = JSON.stringify(projectTodoItem);
 
@@ -69,16 +65,15 @@ export default function projectTodo() {
 
     projectTitleContainer.addEventListener("click", (e) => {
         if (e.target.classList.contains("project-title")) {
-            e.stopPropagation();
+            e.stopImmediatePropagation();
 
-            let projectName = e.target.dataset.name;
+            projectName = e.target.dataset.name;
 
             clearMainContent();
 
-            const projectTodoInstance = new ProjectTodo(projectName);
-            projectTodoInstance.display();
-            projectTodoInstance.displayTodos();
-            projectTodoInstance.handleForms();
+            ProjectTodo.display(projectName);
+            ProjectTodo.displayTodos(projectName);
+            ProjectTodo.handleForms();
         }
     });
 }

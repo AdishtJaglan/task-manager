@@ -56,7 +56,7 @@ nav {
 
 nav p:nth-child(1) {
   margin-left: 2%;
-  font-size: 2.5em;
+  font-size: 2.7em;
 }
 
 nav p:nth-child(2) {
@@ -82,12 +82,13 @@ nav p:nth-child(2) {
   height: 15%;
 
   margin-left: 8%;
+  padding: 2%;
 }
 
 .daily-todo p,
 .projects p {
-  font-size: 1.8em;
-  color: #495057;
+  font-size: 2.2em;
+  color: #212529;
 
   margin: 5%;
 }
@@ -98,6 +99,13 @@ nav p:nth-child(2) {
   height: 35%;
 
   border-radius: 8px;
+  background-color: #f8f9fa;
+
+  font-size: 0.9em;
+  font-family: var(--text-tertiary);
+  font-weight: bold;
+  color: #495057;
+  cursor: pointer;
 }
 
 /* dialog styling */
@@ -364,7 +372,7 @@ select {
 
   font-family: var(--text-secondary);
   font-size: 1.3em;
-  color:#495057
+  color: #495057;
 }
 
 .btn-delete-project {
