@@ -1,4 +1,5 @@
 import { v1 as uuidv1 } from 'uuid';
+import { format } from 'date-fns';
 import { Todos } from "./todo";
 import clearMainContent from "./clear";
 let projectName;
@@ -18,7 +19,7 @@ class ProjectTodo {
 
     static displayTodos(projectName) {
         const keys = Object.keys(localStorage);
-        const filteredKey = keys.filter(key => key.includes(`${projectName}`));``
+        const filteredKey = keys.filter(key => key.includes(`${projectName}`)); ``
 
         for (let key of filteredKey) {
             let ptItem = JSON.parse(localStorage.getItem(key));
@@ -51,7 +52,8 @@ class ProjectTodo {
             const projectTodoPriority = document.querySelector("#project-todo-priority");
 
             let id = `${projectName}-${uuidv1()}`;
-            let projectTodoItem = Todos.newTodo(projectTodoTitle.value, projectTodoDescription.value, projectTodoDueDate.value, projectTodoPriority.value, projectName);
+            let formatDueDate = format(new Date(projectTodoDueDate.value), "dd-MM-yyyy");
+            let projectTodoItem = Todos.newTodo(projectTodoTitle.value, projectTodoDescription.value, formatDueDate, projectTodoPriority.value, projectName);
             let projectTodoJSON = JSON.stringify(projectTodoItem);
 
             projectTodoTitle.value = "";

@@ -51,7 +51,7 @@ class Project {
         if (projectToDelete) {
             projectToDelete.closest("div").remove();
         }
-        
+
         Window.location.reload();
         this.reloadProject();
     }
@@ -68,7 +68,7 @@ class Project {
 export default function makeProject() {
     Project.populateProject();
 
-    const makeProjectButton = document.querySelector(".projects button");
+    const makeProjectButton = document.querySelector(".daily-make-project");
     const projectDialog = document.querySelector(".project-dialog");
     const btnCloseProject = document.querySelector(".btn-close-project");
     const projectForm = document.querySelector(".project-form");

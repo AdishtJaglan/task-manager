@@ -1,4 +1,6 @@
 import { v1 as uuidv1, validate as uuidValidate } from 'uuid';
+import { format, eachDayOfInterval, isWithinInterval } from 'date-fns';
+import clearMainContent from './clear';
 import deleteIcon from './images/delete-icon-2.svg';
 import expandIcon from './images/expand.svg';
 
@@ -129,6 +131,28 @@ export class Todos {
 
         this.populateTodos();
     }
+
+    static filterByDueDate(interval) {
+        const todoContainer = document.querySelector("#todos");
+        clearMainContent();
+
+        const today = new Date();
+        const filteredTodos = [];
+
+        for (let key in localStorage) {
+            if (uuidValidate(key)) {
+                const todo = JSON.parse(localStorage.getItem(key));
+
+                if (isWithinInterval(dueDate, today)) {
+                    filteredTodos.push({ id: key, todo });
+                }
+            }
+        }
+
+        filteredTodos.forEach(({ id, todo }) => {
+            this.displayTodo(todo, id);
+        });
+    }
 }
 
 function getPriorityColor(priority) {
@@ -145,7 +169,7 @@ function getPriorityColor(priority) {
 export default function makeToDo() {
     Todos.populateTodos();
 
-    const makeToDoButton = document.querySelector(".daily-todo button");
+    const makeToDoButton = document.querySelector(".daily-make-todo");
     const btnCloseTodo = document.querySelector(".btn-close-todo");
     const todoDialog = document.querySelector(".todo-dialog");
     const todoForm = document.querySelector(".todo-form");
@@ -168,7 +192,8 @@ export default function makeToDo() {
         const todoPriority = document.querySelector("#todo-priority");
 
         let id = uuidv1();
-        let item = Todos.newTodo(todoTitle.value, todoDescription.value, todoDueDate.value, todoPriority.value, 0);
+        let formattedDueDate = format(new Date(todoDueDate.value), "dd-MM-yyyy");
+        let item = Todos.newTodo(todoTitle.value, todoDescription.value, formattedDueDate, todoPriority.value, 0);
         let itemJSON = JSON.stringify(item);
 
         Todos.displayTodo(item, id);
