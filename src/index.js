@@ -5,8 +5,8 @@ import projectTodo from "./projectTodo";
 import addIcons from "./addIcon";
 import filterChoice from "./filter";
 
+addIcons();
 makeToDo();
 makeProject();
 projectTodo();
-addIcons();
 filterChoice();

@@ -70,7 +70,7 @@ export default function makeProject() {
 
     const makeProjectButton = document.querySelector(".daily-make-project");
     const projectDialog = document.querySelector(".project-dialog");
-    const btnCloseProject = document.querySelector(".btn-close-project");
+    const btnCloseProject = document.querySelector(".project-close-icon");
     const projectForm = document.querySelector(".project-form");
 
     makeProjectButton.addEventListener("click", () => {
