@@ -52,7 +52,7 @@ class Project {
             projectToDelete.closest("div").remove();
         }
 
-        Window.location.reload();
+        window.location.reload();
         this.reloadProject();
     }
 

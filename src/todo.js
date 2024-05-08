@@ -132,18 +132,28 @@ export class Todos {
         this.populateTodos();
     }
 
-    static filterByDueDate(interval) {
-        const todoContainer = document.querySelector("#todos");
+    static filterByDueDate(range) {
         clearMainContent();
 
         const today = new Date();
+        const endDate = new Date();
         const filteredTodos = [];
+        
+        endDate.setDate(today.getDate() + range);
 
-        for (let key in localStorage) {
-            if (uuidValidate(key)) {
-                const todo = JSON.parse(localStorage.getItem(key));
+        const keys = Object.keys(localStorage);
+        const todoKeys = keys.filter(key => !(key.includes("project")));
 
-                if (isWithinInterval(dueDate, today)) {
+        for (let key of todoKeys) {
+            const todoString = localStorage.getItem(key);
+
+            if (todoString) {
+                const todo = JSON.parse(todoString);
+
+                const dueDateParts = todo.dueDate.split('-');
+                const dueDate = new Date(dueDateParts[2], dueDateParts[1] - 1, dueDateParts[0]);
+
+                if (isWithinInterval(dueDate, { start: today, end: endDate })) {
                     filteredTodos.push({ id: key, todo });
                 }
             }
@@ -153,6 +163,7 @@ export class Todos {
             this.displayTodo(todo, id);
         });
     }
+
 }
 
 function getPriorityColor(priority) {
