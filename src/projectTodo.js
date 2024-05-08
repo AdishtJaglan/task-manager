@@ -18,7 +18,7 @@ class ProjectTodo {
 
     static displayTodos(projectName) {
         const keys = Object.keys(localStorage);
-        const filteredKey = keys.filter(key => key.includes(`${projectName}`));
+        const filteredKey = keys.filter(key => key.includes(`${projectName}`));``
 
         for (let key of filteredKey) {
             let ptItem = JSON.parse(localStorage.getItem(key));
@@ -54,6 +54,12 @@ class ProjectTodo {
             let projectTodoItem = Todos.newTodo(projectTodoTitle.value, projectTodoDescription.value, projectTodoDueDate.value, projectTodoPriority.value, projectName);
             let projectTodoJSON = JSON.stringify(projectTodoItem);
 
+            projectTodoTitle.value = "";
+            projectTodoDescription.value = "";
+            projectTodoDueDate.value = "";
+            projectTodoPriority.value = "";
+
+            projectTodoDialog.close();
             Todos.displayTodo(projectTodoItem, id);
             localStorage.setItem(id, projectTodoJSON);
         });

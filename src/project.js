@@ -19,7 +19,7 @@ class Project {
         projectContainer.innerHTML = `
             <div class="project-names-container">
                 <button data-name=${name} class="project-title">${name}</button>
-                <img src="${deleteIcon}" alt="delete button" data-id="${id}" class="btn-delete-project">
+                <img src="${deleteIcon}" alt="delete button" data-namefordeletion=${name} data-id="${id}" class="btn-delete-project">
             </div>
         `
 
@@ -37,14 +37,22 @@ class Project {
         }
     }
 
-    static deleteProject(id) {
+    static deleteProject(id, name) {
+        const projectKey = Object.keys(localStorage);
+        const filteredProjectKeys = projectKey.filter(keys => keys.includes(`${name}`));
+
+        for (let keys of filteredProjectKeys) {
+            localStorage.removeItem(keys);
+        }
+
         localStorage.removeItem(id);
 
         const projectToDelete = document.querySelector(`[data-id="${id}]"`);
         if (projectToDelete) {
             projectToDelete.closest("div").remove();
         }
-
+        
+        Window.location.reload();
         this.reloadProject();
     }
 
@@ -92,8 +100,9 @@ export default function makeProject() {
     document.addEventListener("click", (e) => {
         if (e.target.classList.contains("btn-delete-project")) {
             const projectId = e.target.dataset.id;
+            const projectName = e.target.dataset.namefordeletion;
 
-            Project.deleteProject(projectId);
+            Project.deleteProject(projectId, projectName);
         }
     });
 }
