@@ -50,7 +50,7 @@ nav {
   align-items: center;
   justify-content: space-between;
 
-  color: #adb5bd;
+  color: #f8f9fa;
   height: 10vh;
 }
 
@@ -377,4 +377,15 @@ select {
 
 .btn-delete-project {
   cursor: pointer;
+}
+
+.todo-icon {
+  width: 35%;
+}
+
+nav p:nth-child(1) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5%;
 }
