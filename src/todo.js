@@ -3,15 +3,16 @@ import deleteIcon from './images/delete-icon-2.svg';
 import expandIcon from './images/expand.svg';
 
 export class Todos {
-    constructor(title, description, dueDate, priority) {
+    constructor(title, description, dueDate, priority, projectName) {
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
+        this.projectName = projectName;
     }
 
-    static newTodo(title, description, dueDate, priority) {
-        const todo = new Todos(title, description, dueDate, priority);
+    static newTodo(title, description, dueDate, priority, projectName) {
+        const todo = new Todos(title, description, dueDate, priority, projectName);
 
         return todo;
     }
@@ -80,15 +81,46 @@ export class Todos {
         }
     }
 
-    static deleteTodo(id) {
-        localStorage.removeItem(id);
-        const todoToDelete = document.querySelector(`[data-id="${id}]"`);
+    static populateProjectTodos(projectName) {
+        const keys = Object.keys(localStorage);
+        const filteredKey = keys.filter(key => key.includes(`${projectName}`));
 
-        if (todoToDelete) {
-            todoToDelete.closest("div").remove();
+        for (let key of filteredKey) {
+            let ptItem = JSON.parse(localStorage.getItem(key));
+
+            this.displayTodo(ptItem, key);
         }
+    }
 
-        this.reloadTodos();
+    static deleteTodo(id) {
+        const item = JSON.parse(localStorage.getItem(id));
+
+        if (item.projectName != 0) {
+            localStorage.removeItem(id);
+            const todoToDelete = document.querySelector(`[data-id="${id}]"`);
+
+            if (todoToDelete) {
+                todoToDelete.closest("div").remove();
+            }
+
+            this.reloadProjectTodos(item.projectName);
+        } else {
+            localStorage.removeItem(id);
+            const todoToDelete = document.querySelector(`[data-id="${id}]"`);
+
+            if (todoToDelete) {
+                todoToDelete.closest("div").remove();
+            }
+
+            this.reloadTodos();
+        }
+    }
+
+    static reloadProjectTodos(projectName) {
+        const todoContainer = document.querySelector("#todos");
+        todoContainer.innerHTML = " ";
+
+        this.populateProjectTodos(projectName);
     }
 
     static reloadTodos() {
@@ -136,7 +168,7 @@ export default function makeToDo() {
         const todoPriority = document.querySelector("#todo-priority");
 
         let id = uuidv1();
-        let item = Todos.newTodo(todoTitle.value, todoDescription.value, todoDueDate.value, todoPriority.value);
+        let item = Todos.newTodo(todoTitle.value, todoDescription.value, todoDueDate.value, todoPriority.value, 0);
         let itemJSON = JSON.stringify(item);
 
         Todos.displayTodo(item, id);

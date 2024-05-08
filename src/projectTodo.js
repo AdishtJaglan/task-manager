@@ -51,7 +51,7 @@ class ProjectTodo {
             const projectTodoPriority = document.querySelector("#project-todo-priority");
 
             let id = `${projectName}-${uuidv1()}`;
-            let projectTodoItem = Todos.newTodo(projectTodoTitle.value, projectTodoDescription.value, projectTodoDueDate.value, projectTodoPriority.value);
+            let projectTodoItem = Todos.newTodo(projectTodoTitle.value, projectTodoDescription.value, projectTodoDueDate.value, projectTodoPriority.value, projectName);
             let projectTodoJSON = JSON.stringify(projectTodoItem);
 
             Todos.displayTodo(projectTodoItem, id);
