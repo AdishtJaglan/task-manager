@@ -59,6 +59,7 @@ nav {
   font-size: 2.7em;
 
   display: flex;
+  flex-direction: row-reverse;
   justify-content: center;
   align-items: center;
   gap: 5%;
@@ -142,8 +143,6 @@ dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-.todo-container,
-.todo-form,
 .project-todo-container,
 .project-todo-form {
   width: 100%;
@@ -159,24 +158,7 @@ dialog::backdrop {
   background-color: lightgrey;
 }
 
-input,
-textarea,
-select {
-  outline: none;
-
-  width: 100%;
-  height: 12%;
-
-  text-align: center;
-
-  border-radius: 6px;
-  border: none;
-
-  margin: 3%;
-}
-
 .btn-make-todo,
-.btn-close-todo,
 .btn-make-project-todo,
 .btn-close-project-todo {
   width: 90%;
@@ -184,6 +166,8 @@ select {
 
   border-radius: 8px;
 }
+
+/* project dialog */
 
 .project-dialog {
   height: 25%;
@@ -246,6 +230,9 @@ select {
   margin: 0;
   text-align: left;
   padding: 1%;
+  outline: none;
+  border: none;
+  border-radius: 6px;
 }
 
 .project-form label {
@@ -258,6 +245,94 @@ select {
 
   border-radius: 6px;
   background-color: white;
+  cursor: pointer;
+}
+
+/* todo dialog styles */
+.todo-dialog {
+  height: 70%;
+  width: 40%;
+}
+
+.todo-dialog .todo-container {
+  padding: 20px;
+}
+
+.todo-dialog .header-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.todo-dialog .todo-heading {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.todo-dialog .todo-title-label,
+.todo-dialog .todo-description-label,
+.todo-dialog .todo-dueDate-label,
+.todo-dialog .todo-priority-label {
+  margin-bottom: 20px;
+}
+
+.todo-dialog label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.todo-dialog input[type="text"],
+.todo-dialog textarea,
+.todo-dialog input[type="date"],
+.todo-dialog select {
+  outline: none;
+  width: calc(100% - 22px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.todo-dialog select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>');
+  background-position: right 10px top 50%;
+  background-size: 12px;
+  background-repeat: no-repeat;
+  padding-right: 30px;
+}
+
+.todo-dialog button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.todo-dialog button:hover {
+  background-color: #0056b3;
+}
+
+.header-container {
+  height: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+}
+
+.btn-close-todo {
+  width: 7%;
   cursor: pointer;
 }
 

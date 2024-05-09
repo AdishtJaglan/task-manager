@@ -23,7 +23,7 @@
       <p class="page-title"></p>
 
       <div class="filter-by">
-        <p class="all-todos">all</p>
+        <p class="all-todos">inbox</p>
         <p class="weekly-todos">this week</p>
         <p class="monthly-todos">this month</p>
       </div>
@@ -49,28 +49,42 @@
 
     <dialog class="todo-dialog">
       <div class="todo-container">
+        <div class="header-container">
+          <p class="todo-heading">New Todo</p>
+        </div>
+
         <form method="dialog" class="todo-form">
-          <input type="text" name="title" id="todo-title" />
+          <div class="todo-title-label">
+            <label for="todo-title">Title:</label>
+            <input type="text" name="title" id="todo-title" />
+          </div>
 
-          <input type="date" name="dueDate" id="todo-dueDate" />
+          <div class="todo-description-label">
+            <label for="todo-description">Description:</label>
+            <textarea
+              name="description"
+              id="todo-description"
+              cols="30"
+              rows="8"
+            ></textarea>
+          </div>
 
-          <textarea
-            name="description"
-            id="todo-description"
-            cols="30"
-            rows="6"
-          ></textarea>
+          <div class="todo-dueDate-label">
+            <label for="todo-dueDate">Due Date:</label>
+            <input type="date" name="dueDate" id="todo-dueDate" />
+          </div>
 
-          <select name="priority" id="todo-priority">
-            <option value="low" selected>low</option>
-            <option value="medium">medium</option>
-            <option value="high">high</option>
-          </select>
+          <div class="todo-priority-label">
+            <label for="todo-priority">Priority:</label>
+            <select name="priority" id="todo-priority">
+              <option value="low" selected>low</option>
+              <option value="medium">medium</option>
+              <option value="high">high</option>
+            </select>
+          </div>
 
           <button class="btn-make-todo" type="submit">make todo</button>
         </form>
-
-        <button autofocus class="btn-close-todo">close</button>
       </div>
     </dialog>
 
@@ -79,7 +93,7 @@
         <div class="project-header">
           <p>new project</p>
         </div>
-        
+
         <form action="" method="dialog" class="project-form">
           <label for="name">name:</label>
           <input type="name" id="name" />

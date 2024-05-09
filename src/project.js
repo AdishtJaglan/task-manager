@@ -1,4 +1,4 @@
-import { v1 as uuidv1, validate as uuidValidate } from 'uuid';
+import { v1 as uuidv1 } from 'uuid';
 import deleteIcon from './images/delete-icon-2.svg';
 
 class Project {

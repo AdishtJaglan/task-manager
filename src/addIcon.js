@@ -14,12 +14,19 @@ function addLogo() {
 
 function addCloseIcon() {
     const projectDialogHeader = document.querySelector(".project-header");
-    const iconClose = new Image();
+    const todoDialogHeaeder = document.querySelector(".header-container");
 
-    iconClose.src = closeIcon;
-    iconClose.classList.add("project-close-icon");
+    const projectIconClose = new Image();
+    const todoIconClose = new Image();
 
-    projectDialogHeader.appendChild(iconClose);
+    todoIconClose.src = closeIcon;
+    todoIconClose.classList.add("btn-close-todo");
+
+    projectIconClose.src = closeIcon;
+    projectIconClose.classList.add("project-close-icon");
+
+    projectDialogHeader.appendChild(projectIconClose);
+    todoDialogHeaeder.appendChild(todoIconClose);
 }
 
 export default function addIcons() {

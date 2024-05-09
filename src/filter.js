@@ -1,4 +1,5 @@
 import { Todos } from './todo';
+import { TodoUI } from './todoUI';
 import clearMainContent from './clear';
 
 export default function filterChoice() {
@@ -8,14 +9,14 @@ export default function filterChoice() {
 
     allTodos.addEventListener("click", () => {
         clearMainContent();
-        
+
         const keys = Object.keys(localStorage);
         const todoKeys = keys.filter(key => !(key.includes("project")));
 
         for (let key of todoKeys) {
             let tdItem = JSON.parse(localStorage.getItem(key));
 
-            Todos.displayTodo(tdItem, key);
+            TodoUI.displayTodo(tdItem, key);
         }
     });
 

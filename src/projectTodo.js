@@ -1,6 +1,7 @@
 import { v1 as uuidv1 } from 'uuid';
 import { format } from 'date-fns';
 import { Todos } from "./todo";
+import { TodoUI } from './todoUI';
 import clearMainContent from "./clear";
 let projectName;
 
@@ -24,7 +25,7 @@ class ProjectTodo {
         for (let key of filteredKey) {
             let ptItem = JSON.parse(localStorage.getItem(key));
 
-            Todos.displayTodo(ptItem, key);
+            TodoUI.displayTodo(ptItem, key);
         }
     }
 
@@ -62,7 +63,7 @@ class ProjectTodo {
             projectTodoPriority.value = "";
 
             projectTodoDialog.close();
-            Todos.displayTodo(projectTodoItem, id);
+            TodoUI.displayTodo(projectTodoItem, id);
             localStorage.setItem(id, projectTodoJSON);
         });
     }

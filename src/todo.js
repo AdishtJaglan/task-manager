@@ -1,8 +1,8 @@
 import { v1 as uuidv1, validate as uuidValidate } from 'uuid';
-import { format, eachDayOfInterval, isWithinInterval } from 'date-fns';
+import { format, isWithinInterval } from 'date-fns';
+import { TodoUI } from './todoUI';
 import clearMainContent from './clear';
-import deleteIcon from './images/delete-icon-2.svg';
-import expandIcon from './images/expand.svg';
+
 
 export class Todos {
     constructor(title, description, dueDate, priority, projectName) {
@@ -19,81 +19,6 @@ export class Todos {
         return todo;
     }
 
-    static displayTodo(todoObj, id) {
-        const todoContainer = document.querySelector("#todos");
-        const newTodoContainer = document.createElement("div");
-        const style = getPriorityColor(todoObj.priority);
-
-        newTodoContainer.innerHTML = `
-        <div class="todo-card">
-            <div class="todo-headings">  
-                <div class="heading">
-                <p class="todo-title">${todoObj.title}</p>
-                <button class="todo-priority" style="background-color:${style}"></button>
-                </div>
-                <p class="todo-dueDate">${todoObj.dueDate}</p>
-            </div>
-            
-            <div class="todo-actions">
-                <img src="${deleteIcon}" alt="delete button" data-id="${id}" class="btn-delete-todo">
-                <img src="${expandIcon}" data-infoId="${id}" class="btn-expand-todo">
-            </div>
-        </div>
-        `
-        todoContainer.appendChild(newTodoContainer);
-    }
-
-    static displayTodoInfo(id) {
-        const lsItem = JSON.parse(localStorage.getItem(id));
-        const infoDialog = document.createElement("dialog");
-        const body = document.querySelector("body");
-        const style = getPriorityColor(lsItem.priority);
-
-        infoDialog.classList.add("info-dialog");
-        infoDialog.innerHTML = `
-        <div class="info-container">
-            <div class="info-heading">
-                <p>${lsItem.title}</p>
-                <button class="todo-priority" style="background-color:${style}"></button>
-            </div>
-        
-            <p>${lsItem.dueDate}</p>
-            <p>${lsItem.description}</p>
-            <button class="btn-info-close">close</button>
-        </div>
-        `;
-
-        body.appendChild(infoDialog);
-        infoDialog.showModal();
-
-        const closeInfoBtn = infoDialog.querySelector(".btn-info-close");
-        closeInfoBtn.addEventListener("click", () => {
-            infoDialog.close();
-            infoDialog.remove();
-        });
-    }
-
-    static populateTodos() {
-        for (let key in localStorage) {
-            if (uuidValidate(key)) {
-                const lsItem = JSON.parse(localStorage.getItem(key));
-
-                this.displayTodo(lsItem, key);
-            }
-        }
-    }
-
-    static populateProjectTodos(projectName) {
-        const keys = Object.keys(localStorage);
-        const filteredKey = keys.filter(key => key.includes(`${projectName}`));
-
-        for (let key of filteredKey) {
-            let ptItem = JSON.parse(localStorage.getItem(key));
-
-            this.displayTodo(ptItem, key);
-        }
-    }
-
     static deleteTodo(id) {
         const item = JSON.parse(localStorage.getItem(id));
 
@@ -105,7 +30,7 @@ export class Todos {
                 todoToDelete.closest("div").remove();
             }
 
-            this.reloadProjectTodos(item.projectName);
+            TodoUI.reloadProjectTodos(item.projectName);
         } else {
             localStorage.removeItem(id);
             const todoToDelete = document.querySelector(`[data-id="${id}]"`);
@@ -114,22 +39,8 @@ export class Todos {
                 todoToDelete.closest("div").remove();
             }
 
-            this.reloadTodos();
+            TodoUI.reloadTodos();
         }
-    }
-
-    static reloadProjectTodos(projectName) {
-        const todoContainer = document.querySelector("#todos");
-        todoContainer.innerHTML = " ";
-
-        this.populateProjectTodos(projectName);
-    }
-
-    static reloadTodos() {
-        const todoContainer = document.querySelector("#todos");
-        todoContainer.innerHTML = " ";
-
-        this.populateTodos();
     }
 
     static filterByDueDate(range) {
@@ -138,7 +49,7 @@ export class Todos {
         const today = new Date();
         const endDate = new Date();
         const filteredTodos = [];
-        
+
         endDate.setDate(today.getDate() + range);
 
         const keys = Object.keys(localStorage);
@@ -160,25 +71,14 @@ export class Todos {
         }
 
         filteredTodos.forEach(({ id, todo }) => {
-            this.displayTodo(todo, id);
+            TodoUI.displayTodo(todo, id);
         });
     }
 
 }
 
-function getPriorityColor(priority) {
-    switch (priority) {
-        case "high":
-            return "#d00000";
-        case "medium":
-            return "#FFA500";
-        default:
-            return "#aacc00";
-    }
-}
-
 export default function makeToDo() {
-    Todos.populateTodos();
+    TodoUI.populateTodos();
 
     const makeToDoButton = document.querySelector(".daily-make-todo");
     const btnCloseTodo = document.querySelector(".btn-close-todo");
@@ -207,7 +107,7 @@ export default function makeToDo() {
         let item = Todos.newTodo(todoTitle.value, todoDescription.value, formattedDueDate, todoPriority.value, 0);
         let itemJSON = JSON.stringify(item);
 
-        Todos.displayTodo(item, id);
+        TodoUI.displayTodo(item, id);
         localStorage.setItem(`${id}`, itemJSON);
 
         todoTitle.value = "";
@@ -226,7 +126,7 @@ export default function makeToDo() {
         } else if (e.target.classList.contains("btn-expand-todo")) {
             const todoId = e.target.dataset.infoid;
 
-            Todos.displayTodoInfo(todoId);
+            TodoUI.displayTodoInfo(todoId);
         }
     });
 }
