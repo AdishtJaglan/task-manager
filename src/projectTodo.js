@@ -2,31 +2,13 @@ import { v1 as uuidv1 } from 'uuid';
 import { format } from 'date-fns';
 import { Todos } from "./todo";
 import { TodoUI } from './todoUI';
+import { ProjectTodoUI } from './projectTodoUI';
 import clearMainContent from "./clear";
 let projectName;
 
 class ProjectTodo {
     constructor(name) {
         this.name = name;
-    }
-
-    static display(projectName) {
-        const formContainer = document.querySelector(".daily-todo");
-        formContainer.innerHTML = `
-            <p>${projectName} todos</p>
-            <button class="btn-project-todo">add todo</button>
-        `;
-    }
-
-    static displayTodos(projectName) {
-        const keys = Object.keys(localStorage);
-        const filteredKey = keys.filter(key => key.includes(`${projectName}`)); ``
-
-        for (let key of filteredKey) {
-            let ptItem = JSON.parse(localStorage.getItem(key));
-
-            TodoUI.displayTodo(ptItem, key);
-        }
     }
 
     static handleForms() {
@@ -80,8 +62,8 @@ export default function projectTodo() {
 
             clearMainContent();
 
-            ProjectTodo.display(projectName);
-            ProjectTodo.displayTodos(projectName);
+            ProjectTodoUI.display(projectName);
+            ProjectTodoUI.displayTodos(projectName);
             ProjectTodo.handleForms();
         }
     });
