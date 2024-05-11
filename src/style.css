@@ -143,32 +143,7 @@ dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-.project-todo-container,
-.project-todo-form {
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  gap: 3%;
-
-  background-color: lightgrey;
-}
-
-.btn-make-todo,
-.btn-make-project-todo,
-.btn-close-project-todo {
-  width: 90%;
-  height: 10%;
-
-  border-radius: 8px;
-}
-
 /* project dialog */
-
 .project-dialog {
   height: 25%;
   width: 30%;
@@ -332,6 +307,94 @@ dialog::backdrop {
 }
 
 .btn-close-todo {
+  width: 7%;
+  cursor: pointer;
+}
+
+/* project todo stlying */
+.project-todo-dialog {
+  height: 70%;
+  width: 40%;
+}
+
+.project-todo-dialog .project-todo-container {
+  padding: 20px;
+}
+
+.project-todo-dialog .project-todo-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.project-todo-dialog .project-todo-heading {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.project-todo-dialog .project-todo-title-label,
+.project-todo-dialog .project-todo-description,
+.project-todo-dialog .project-todo-dueDate-label,
+.project-todo-dialog .project-todo-priority {
+  margin-bottom: 20px;
+}
+
+.project-todo-dialog label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.project-todo-dialog input[type="text"],
+.project-todo-dialog textarea,
+.project-todo-dialog input[type="date"],
+.project-todo-dialog select {
+  outline: none;
+  width: calc(100% - 22px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.project-todo-dialog select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>');
+  background-position: right 10px top 50%;
+  background-size: 12px;
+  background-repeat: no-repeat;
+  padding-right: 30px;
+}
+
+.project-todo-dialog button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.project-todo-dialog button:hover {
+  background-color: #0056b3;
+}
+
+.project-todo-dialog .project-todo-header {
+  height: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+}
+
+.project-todo-dialog .btn-close-project-todo {
   width: 7%;
   cursor: pointer;
 }
